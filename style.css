@@ -1,0 +1,151 @@
+/* =================================================================== */
+/* CSS PARA ESTILOS E ANIMAÇÕES                                      */
+/* =================================================================== */
+
+/* --- CONFIGURAÇÃO BÁSICA --- */
+body {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    font-family: 'Helvetica Neue', sans-serif;
+    margin: 0;
+    text-align: center;
+    transition: background-image 1.5s ease-in-out;
+}
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #444;
+    position: relative;
+    overflow: hidden;
+}
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; }
+p { font-size: 1.2rem; max-width: 800px; line-height: 1.6; }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 10px; }
+
+/* Adicione esta nova regra */
+.image-grid img {
+    max-width: 280px; /* Define uma largura máxima para cada print */
+    height: auto;     /* Mantém a proporção da imagem */
+}
+
+/* --- TELA INICIAL --- */
+#start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    transition: opacity 0.5s ease;
+}
+
+/* --- SEÇÃO WHATSAPP --- */
+.image-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+/* --- SEÇÃO DA CORREÇÃO --- */
+.section-correction .correction-text {
+    position: relative;
+    font-family: 'Caveat', cursive;
+    font-size: 5rem;
+    font-weight: bold;
+    width: 100%;
+}
+.strikethrough::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    right: -5%;
+    height: 15px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><path d="M0,50 Q25,25 50,50 T100,50" stroke="red" stroke-width="15" fill="none"/></svg>');
+    background-size: 50px 20px;
+    width: 0;
+    transition: width 0.4s ease-out;
+}
+.section-correction.animate .strikethrough::after { width: 110%; }
+.correction {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 7rem;
+    color: #ffdd00;
+    text-shadow: 2px 2px 5px black;
+}
+.correction, .engineer-joke {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+.section-correction.animate .correction { opacity: 1; transition-delay: 0.4s; }
+.section-correction.animate .engineer-joke { opacity: 1; transition-delay: 0.8s; }
+
+/* --- SEÇÃO CAOS 1 (FOTOS E CONFETE) --- */
+.photo-container { position: relative; width: 900px; height: 500px; opacity: 0; transition: opacity 1s ease-in; }
+#chaos-section.activated .photo-container { opacity: 1; }
+/* Bloco alterado */
+.photo {
+    position: absolute;
+    border: 5px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    max-width: 350px; /* Adicione esta linha para limitar a largura */
+    height: auto;     /* Adicione esta linha para manter a proporção */
+}
+.photo1 { transform: rotate(-15deg); top: 80px; left: 50px; z-index: 1; }
+.photo2 { transform: rotate(8deg); top: 50px; left: 300px; z-index: 2; }
+.photo3 { transform: rotate(12deg); top: 100px; left: 550px; z-index: 1; }
+.confetti { position: absolute; width: 10px; height: 10px; background-color: #f00; top: -20px; opacity: 0; animation: fall 5s linear infinite; }
+@keyframes fall {
+    0% { top: -20px; opacity: 1; transform: rotate(0deg); }
+    100% { top: 110vh; opacity: 1; transform: rotate(720deg); }
+}
+
+/* --- SEÇÃO CAOS 2 (EMOJIS E FUNK) --- */
+.jokes-text { font-size: 2rem; font-weight: bold; background-color: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; z-index: 10; }
+.distorted-emoji { position: absolute; width: 100px; height: 100px; background-size: cover; animation: fly-and-spin 10s linear infinite; }
+@keyframes fly-and-spin {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    25% { opacity: 1; }
+    50% { transform: translate(var(--x-end), var(--y-end)) rotate(360deg); opacity: 1; }
+    75% { opacity: 1; }
+    100% { transform: translate(0, 0) rotate(720deg); opacity: 0; }
+}
+
+/* --- SEÇÃO DINOSSAUROS --- */
+.section-dinos { background-color: #2c3e50; }
+.dino-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; width: 90%; max-width: 1200px; }
+.dino-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Linha corrigida */
+    border: 3px solid #ecf0f1;
+    transition: transform 0.3s ease;
+}
+.dino-gallery img:hover { transform: scale(1.05) rotate(3deg); z-index: 5; }
+
+/* --- SEÇÃO FINAL (GATOS) --- */
+.final-text { background-color: rgba(0,0,0,0.6); padding: 30px; border-radius: 15px; z-index: 5; }
+.cat-meme { position: absolute; width: 120px; height: auto; animation: fall 8s linear infinite; z-index: 1; }
+
+/* --- GRAND FINALE (FOGOS DE ARTIFÍCIO) --- */
+footer {
+    height: 200px;
+    border: none;
+}
+.fireworks-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+.firework { position: absolute; width: 5px; height: 5px; border-radius: 50%; opacity: 0; }
+@keyframes explode {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(1); opacity: 0; }
+}
